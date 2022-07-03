@@ -1,0 +1,3 @@
+REFERENCES
+
+- FUNDAMENTALS OF DATA STRUCTURES IN C -Horowitz, Shani, Anderson-Freed
