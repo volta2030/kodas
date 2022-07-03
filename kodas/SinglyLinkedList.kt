@@ -1,22 +1,27 @@
 package kodas
 
-class SinglyLinkedList(data : Any) : LinkedList{
+open class SinglyLinkedList : LinkedList{
 
-    private var head = Node(data)
+    protected var head : Node ?= null
 
     override fun insert(index : Int, data : Any) {
-        var prevNode : Node = head
-        var nextNode : Node = head
+        var prevNode : Node? = head
+        var nextNode : Node? = head
 
         var count : Int = 0
 
-        if(index == 0){
+        if(head == null){
             head = Node(data)
-            head.next = nextNode
             return
         }
 
-        while(nextNode.data != null){
+        if(index == 0){
+            head = Node(data)
+            head?.next = nextNode
+            return
+        }
+
+        while(nextNode?.data != null){
             try {
                 prevNode = nextNode
                 nextNode = nextNode.next!!
@@ -24,7 +29,7 @@ class SinglyLinkedList(data : Any) : LinkedList{
             }catch (e : NullPointerException){
 
                 if(count == index - 1){
-                    prevNode.next = Node(data)
+                    prevNode?.next = Node(data)
                     return
                 }else{
                     println("Invalid")
@@ -33,34 +38,39 @@ class SinglyLinkedList(data : Any) : LinkedList{
             }
         }
 
-        prevNode.next = Node(data)
-        prevNode.next!!.next = nextNode
+        prevNode?.next = Node(data)
+        prevNode?.next!!.next = nextNode
 
     }
 
     override fun delete(index : Int) {
-        var prevNode : Node = head
-        var nextNode : Node = head
+        var prevNode : Node? = head
+        var nextNode : Node? = head
 
         var count : Int = 0
 
+        if(head == null){
+            println("invalid")
+            return
+        }
+
         if(index == 0){
-            try {
-                head = head.next!!
+            head = try {
+                head?.next!!
             }catch (e : NullPointerException){
-                println("Invalid")
+                null
             }
             return
         }
 
-        while(nextNode.data != null){
+        while(nextNode?.data != null){
             try {
                 prevNode = nextNode
-                nextNode = nextNode.next!!
+                nextNode = nextNode?.next!!
                 count++
             }catch (e : NullPointerException){
                 if(count == index - 1){
-                    prevNode.next = null
+                    prevNode?.next = null
                     return
                 }else{
                     println("Invalid")
@@ -76,27 +86,26 @@ class SinglyLinkedList(data : Any) : LinkedList{
         }
 
         prevNode = head
-        while (prevNode.next != nextNode){
-                prevNode = prevNode.next!!
+        while (prevNode?.next != nextNode){
+                prevNode = prevNode?.next!!
         }
 
-        prevNode.next = nextNode.next
+        prevNode?.next = nextNode?.next
 
     }
 
     override fun show() {
 
-        var nextNode : Node = head
+        var nextNode : Node? = head
 
-        while(nextNode.data != null){
+        while(nextNode?.data != null){
             try {
-                print("${nextNode.data} -> ")
+                print("${nextNode?.data} -> ")
                 nextNode = nextNode.next!!
             }catch (e : NullPointerException){
                 println("")
-                break
+                return
             }
         }
     }
-
 }

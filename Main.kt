@@ -1,16 +1,14 @@
 import kodas.SinglyLinkedList
+import kodas.Stack
 
 fun main(){
-    val singlyLinkedList = SinglyLinkedList(1)
-    singlyLinkedList.insert(0, 2)
-    singlyLinkedList.insert(2, 3)
-    singlyLinkedList.insert(4, 100)
-    singlyLinkedList.insert(3, 4)
 
-    singlyLinkedList.show()
+    var stack = Stack()
 
-    singlyLinkedList.delete(1)
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    stack.push(4)
 
-    singlyLinkedList.show()
-
+    stack.top()
 }
