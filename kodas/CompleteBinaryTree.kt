@@ -1,0 +1,4 @@
+package kodas
+
+class CompleteBinaryTree {
+}

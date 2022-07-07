@@ -1,17 +1,21 @@
-package kodas
+package kodas.linkedlist
 
-open class SinglyLinkedList : LinkedList{
+import kodas.Node
 
-    protected var head : Node ?= null
+class DoublyLinkedList {
 
-    override fun insert(index : Int, data : Any) {
+    private var head : Node? = null
+    private var tail : Node? = null
+
+    fun insert(index : Int, data : Any) {
         var prevNode : Node? = head
         var nextNode : Node? = head
 
-        var count : Int = 0
+        var count = 0
 
         if(head == null){
             head = Node(data)
+            tail = head
             return
         }
 
@@ -30,6 +34,7 @@ open class SinglyLinkedList : LinkedList{
 
                 if(count == index - 1){
                     prevNode?.next = Node(data)
+                    tail = prevNode?.next
                     return
                 }else{
                     println("Invalid")
@@ -43,11 +48,11 @@ open class SinglyLinkedList : LinkedList{
 
     }
 
-    override fun delete(index : Int) {
+    fun delete(index : Int) {
         var prevNode : Node? = head
         var nextNode : Node? = head
 
-        var count : Int = 0
+        var count = 0
 
         if(head == null){
             println("invalid")
@@ -58,6 +63,8 @@ open class SinglyLinkedList : LinkedList{
             head = try {
                 head?.next!!
             }catch (e : NullPointerException){
+
+                tail = null
                 null
             }
             return
@@ -71,6 +78,7 @@ open class SinglyLinkedList : LinkedList{
             }catch (e : NullPointerException){
                 if(count == index - 1){
                     prevNode?.next = null
+                    tail = prevNode
                     return
                 }else{
                     println("Invalid")
@@ -87,14 +95,14 @@ open class SinglyLinkedList : LinkedList{
 
         prevNode = head
         while (prevNode?.next != nextNode){
-                prevNode = prevNode?.next!!
+            prevNode = prevNode?.next!!
         }
 
         prevNode?.next = nextNode?.next
 
     }
 
-    override fun show() {
+    fun show() {
 
         var nextNode : Node? = head
 
@@ -106,6 +114,28 @@ open class SinglyLinkedList : LinkedList{
                 println("")
                 return
             }
+        }
+    }
+
+    @Override
+    fun show(index: Int){
+
+        var count = 0
+        var nextNode : Node? = head
+
+        while(nextNode?.data != null){
+
+            if(count == index){
+                println(nextNode.data)
+                return
+            }
+
+            try {
+                nextNode = nextNode.next!!
+            }catch (e : NullPointerException){
+                return
+            }
+            count++
         }
     }
 }

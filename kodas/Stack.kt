@@ -1,10 +1,15 @@
 package kodas
+
+import kodas.linkedlist.SinglyLinkedList
+
+/*
+* First In Last Out
+* */
 class Stack : SinglyLinkedList() {
 
-    var index = 0
+    private var index = 0
 
     fun push(data : Any){
-
         insert(index, data)
         index++
     }
@@ -21,24 +26,7 @@ class Stack : SinglyLinkedList() {
     }
 
     fun top(){
-        var nextNode : Node? = head
-
-        while(nextNode?.data != null){
-            try {
-                  nextNode = nextNode.next!!
-            }catch (e : NullPointerException){
-                println(nextNode.data)
-                return
-            }
-        }
-
-    }
-
-    private fun isEmpty() : Boolean{
-        if(head == null){
-            return true
-        }
-        return false
+        show(index - 1)
     }
 
 }
